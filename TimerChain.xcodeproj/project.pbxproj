@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8669F8E925DB74EC00FCD39B /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8669F8E825DB74EC00FCD39B /* ColumnFlowLayout.swift */; };
 		86E724AF25D2606900A85F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E724AE25D2606900A85F5C /* AppDelegate.swift */; };
 		86E724B125D2606900A85F5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E724B025D2606900A85F5C /* SceneDelegate.swift */; };
 		86E724B325D2606900A85F5C /* TimerChainsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E724B225D2606900A85F5C /* TimerChainsViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8669F8E825DB74EC00FCD39B /* ColumnFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnFlowLayout.swift; sourceTree = "<group>"; };
 		86E724AB25D2606900A85F5C /* TimerChain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerChain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86E724AE25D2606900A85F5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86E724B025D2606900A85F5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8674C18225DBE1BE0049AD6A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		86E724A225D2606800A85F5C = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +148,7 @@
 		86E724E125D2693E00A85F5C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8669F8E825DB74EC00FCD39B /* ColumnFlowLayout.swift */,
 				86E724B425D2606900A85F5C /* Main.storyboard */,
 				86E724B925D2606A00A85F5C /* LaunchScreen.storyboard */,
 				86F4280125DA23F000AC17F8 /* TimerChainsCollectionViewListCell.swift */,
@@ -158,6 +168,7 @@
 		86E724E325D2695700A85F5C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8674C18225DBE1BE0049AD6A /* Extensions */,
 				86E724EA25D26AE000A85F5C /* DataController.swift */,
 				86E724E425D26A3500A85F5C /* TimerChain.xcdatamodeld */,
 			);
@@ -299,6 +310,7 @@
 				86E724B325D2606900A85F5C /* TimerChainsViewController.swift in Sources */,
 				86E724AF25D2606900A85F5C /* AppDelegate.swift in Sources */,
 				86E724B125D2606900A85F5C /* SceneDelegate.swift in Sources */,
+				8669F8E925DB74EC00FCD39B /* ColumnFlowLayout.swift in Sources */,
 				86E724E625D26A3500A85F5C /* TimerChain.xcdatamodeld in Sources */,
 				86F4280225DA23F000AC17F8 /* TimerChainsCollectionViewListCell.swift in Sources */,
 			);
