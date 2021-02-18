@@ -26,12 +26,12 @@ class TimerChainsViewController: UIViewController {
                     sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
                 )
         collectionView.setCollectionViewLayout(columnLayout, animated: true)
+        collectionView.dragInteractionEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupFetchedResultController()
-        
 
         if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {
             indexPaths.forEach { (indexPath) in
@@ -159,7 +159,10 @@ extension TimerChainsViewController: UICollectionViewDataSource {
 extension TimerChainsViewController: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         // TODO
-        guard let fetchedObjects = fetchedResultController.fetchedObjects else { return [UIDragItem]() }
+        guard let fetchedObjects = fetchedResultController.fetchedObjects, indexPath.row < fetchedObjects.count else {
+            print("Preventing dragging")
+            return [UIDragItem]()
+        }
         
         let chain = fetchedObjects[indexPath.row]
         let itemProvider = NSItemProvider(object: chain.objectID.uriRepresentation().absoluteString as NSString)
@@ -170,18 +173,51 @@ extension TimerChainsViewController: UICollectionViewDragDelegate {
 }
 
 extension TimerChainsViewController: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        if collectionView === self.collectionView {
+            if collectionView.hasActiveDrag {
+                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            } else {
+                return UICollectionViewDropProposal(operation: .forbidden)
+            }
+        } else {
+            if collectionView.hasActiveDrag {
+                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            } else {
+                return UICollectionViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         guard let fetchedObjects = fetchedResultController.fetchedObjects else { return }
-        let destinationIndexPath = IndexPath(item: collectionView.numberOfItems(inSection: 0), section: 0)
+        let destinationIndexPath: IndexPath
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            // Get last index path of table view.
+            let section = collectionView.numberOfSections - 1
+            let row = collectionView.numberOfItems(inSection: section)
+            destinationIndexPath = IndexPath(row: row, section: section)
+        }
         let dropItem = coordinator.items[0]
-        let chain = dropItem.dragItem.localObject as! Chain
+        let droppedChain = dropItem.dragItem.localObject as! Chain
+        let sourceIndexPath = dropItem.sourceIndexPath!
         switch coordinator.proposal.operation {
-        case .move, .copy:
-            _ = dropItem.dragItem.itemProvider.loadObject(ofClass: NSString.self, completionHandler: { (string, error) in
-                if error == nil {
-                    
+        case .move:
+            let backgroundContext = dataController.backgroundContext!
+            backgroundContext.perform {
+                var orderedObjects = fetchedObjects
+                orderedObjects.remove(at: sourceIndexPath.row)
+                orderedObjects.insert(droppedChain, at: destinationIndexPath.row)
+                for (index, object) in orderedObjects.enumerated() {
+                    if object.orderIndex != index {
+                        let bgObject = backgroundContext.object(with: object.objectID) as! Chain
+                        bgObject.orderIndex = Int64(index)
+                    }
                 }
-            })
+                try? backgroundContext.save()
+            }
         default: break
         }
     }
@@ -222,9 +258,11 @@ extension TimerChainsViewController: NSFetchedResultsControllerDelegate {
                 }))
             case .move:
                 collectionViewOperations.append(BlockOperation(block: { [weak self] in
-                    self!.collectionView.moveItem(at: indexPath!, to: newIndexPath!)
+                    // self!.collectionView.moveItem(at: indexPath!, to: newIndexPath!)
+                    self!.collectionView.deleteItems(at: [indexPath!])
+                    self!.collectionView.insertItems(at: [newIndexPath!])
                 }))
-            @unknown default:
+            default:
                 break
         }
     }
