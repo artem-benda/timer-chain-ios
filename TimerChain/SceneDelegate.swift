@@ -21,8 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         dataController.load()
                         
-        let navigationController = window?.rootViewController as! UINavigationController
-        let tabViewController = navigationController.topViewController as! 
+        let tabViewController = window?.rootViewController as! UITabBarController
+        let navigationController = tabViewController.children[0] as! UINavigationController
+        let mainViewController = navigationController.topViewController as! TimerChainsViewController
         
         mainViewController.dataController = dataController
     }

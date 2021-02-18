@@ -37,7 +37,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="timerChainsCell" id="HHq-m1-miZ" customClass="TimerChainsCollectionViewListCell" customModule="TimerChain" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="timerChainsCell" id="HHq-m1-miZ" customClass="UICollectionViewListCell">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6fx-9N-Gby">
@@ -66,7 +66,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="C0q-oh-KUE">
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="r7X-Ku-11p"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="r7X-Ku-11p" userLabel="Add Timer Chain">
+                            <connections>
+                                <action selector="presentNewChainAlert" destination="BYZ-38-t0r" id="L5x-7j-MdA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="1Z2-DE-XNZ" id="w7H-HO-BKi"/>

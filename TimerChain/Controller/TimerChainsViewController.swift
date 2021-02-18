@@ -31,6 +31,7 @@ class TimerChainsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupFetchedResultController()
+        
 
         if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {
             indexPaths.forEach { (indexPath) in
@@ -46,10 +47,12 @@ class TimerChainsViewController: UIViewController {
     }
     
     private func setupFetchedResultController() {
+        print("setupFetchedResultController, start")
         let fetchRequest: NSFetchRequest<Chain> = Chain.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "orderIndex", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
-        if let searchText = searchBar.text {
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            print("setupFetchedResultController, predicate with search text = \(searchText)")
             let predicate = NSPredicate(format: "(name CONTAINS[cd] %@)", searchText)
             fetchRequest.predicate = predicate
         }
@@ -60,6 +63,7 @@ class TimerChainsViewController: UIViewController {
         
         do {
             try fetchedResultController.performFetch()
+            collectionView.reloadData()
         } catch {
             fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
@@ -67,7 +71,7 @@ class TimerChainsViewController: UIViewController {
     
     /// Display an alert prompting the user to name a new timer chain. Calls
     /// `addChain(name:)`.
-    func presentNewChainAlert() {
+    @IBAction func presentNewChainAlert() {
         let alert = UIAlertController(title: "New Timer Chain", message: "Enter a name for this Chain", preferredStyle: .alert)
 
         // Create actions
@@ -98,9 +102,11 @@ class TimerChainsViewController: UIViewController {
 
     /// Adds a new timer chain to the database
     func addChain(name: String) {
+        print("addChain(start) name = \(name)")
         // Returning if the request is not performed
         guard let fetchedObjects = fetchedResultController.fetchedObjects else { return }
         
+        print("Adding new Timer Chain")
         let chain = Chain(context: dataController.viewContext)
         chain.name = name
         chain.createdAt = Date()
@@ -128,12 +134,24 @@ extension TimerChainsViewController: UICollectionViewDelegate {
 
 extension TimerChainsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultController.sections?[section].numberOfObjects ?? 0
+        let result = fetchedResultController.sections?[section].numberOfObjects ?? 0
+        return result
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timerChainsCell", for: indexPath) as! TimerChainsCollectionViewListCell
-        // TODO set values for cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timerChainsCell", for: indexPath) as! UICollectionViewListCell
+        // Get model
+        let fetchedObjects = fetchedResultController.fetchedObjects
+        guard fetchedObjects != nil, indexPath.row < fetchedObjects!.count else { return cell }
+        if let chain = fetchedResultController.fetchedObjects?[indexPath.row] {
+            var content = cell.defaultContentConfiguration()
+            // Configure content.
+            content.image = UIImage(systemName: "star")
+            content.text = chain.name
+            // Customize appearance.
+            content.imageProperties.tintColor = .purple
+            cell.contentConfiguration = content
+        }
         return cell
     }
 }
@@ -160,7 +178,7 @@ extension TimerChainsViewController: UICollectionViewDropDelegate {
         switch coordinator.proposal.operation {
         case .move, .copy:
             _ = dropItem.dragItem.itemProvider.loadObject(ofClass: NSString.self, completionHandler: { (string, error) in
-                if error == nil, let  {
+                if error == nil {
                     
                 }
             })

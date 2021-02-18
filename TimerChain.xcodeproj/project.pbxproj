@@ -148,10 +148,10 @@
 		86E724E125D2693E00A85F5C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				86EEC08A25DE86FA00FEE3FD /* Cells */,
 				8669F8E825DB74EC00FCD39B /* ColumnFlowLayout.swift */,
 				86E724B425D2606900A85F5C /* Main.storyboard */,
 				86E724B925D2606A00A85F5C /* LaunchScreen.storyboard */,
-				86F4280125DA23F000AC17F8 /* TimerChainsCollectionViewListCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -173,6 +173,14 @@
 				86E724E425D26A3500A85F5C /* TimerChain.xcdatamodeld */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		86EEC08A25DE86FA00FEE3FD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				86F4280125DA23F000AC17F8 /* TimerChainsCollectionViewListCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
