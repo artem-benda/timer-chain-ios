@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8669F8E925DB74EC00FCD39B /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8669F8E825DB74EC00FCD39B /* ColumnFlowLayout.swift */; };
+		86BD672025DFD96300F04BAB /* EditTimerChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BD671F25DFD96300F04BAB /* EditTimerChainViewController.swift */; };
+		86BD672525DFE74900F04BAB /* EditTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BD672425DFE74900F04BAB /* EditTimerViewController.swift */; };
 		86E724AF25D2606900A85F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E724AE25D2606900A85F5C /* AppDelegate.swift */; };
 		86E724B125D2606900A85F5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E724B025D2606900A85F5C /* SceneDelegate.swift */; };
 		86E724B325D2606900A85F5C /* TimerChainsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E724B225D2606900A85F5C /* TimerChainsViewController.swift */; };
@@ -19,7 +21,7 @@
 		86E724E625D26A3500A85F5C /* TimerChain.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86E724E425D26A3500A85F5C /* TimerChain.xcdatamodeld */; };
 		86E724EB25D26AE000A85F5C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E724EA25D26AE000A85F5C /* DataController.swift */; };
 		86E724F325D26F7800A85F5C /* UIViewController+extension+showErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E724F225D26F7800A85F5C /* UIViewController+extension+showErrorAlert.swift */; };
-		86F4280225DA23F000AC17F8 /* TimerChainsCollectionViewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4280125DA23F000AC17F8 /* TimerChainsCollectionViewListCell.swift */; };
+		86F4280225DA23F000AC17F8 /* TimerCollectionViewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4280125DA23F000AC17F8 /* TimerCollectionViewListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		8669F8E825DB74EC00FCD39B /* ColumnFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnFlowLayout.swift; sourceTree = "<group>"; };
+		86BD671F25DFD96300F04BAB /* EditTimerChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerChainViewController.swift; sourceTree = "<group>"; };
+		86BD672425DFE74900F04BAB /* EditTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerViewController.swift; sourceTree = "<group>"; };
 		86E724AB25D2606900A85F5C /* TimerChain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerChain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86E724AE25D2606900A85F5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86E724B025D2606900A85F5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +62,7 @@
 		86E724E525D26A3500A85F5C /* TimerChain.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimerChain.xcdatamodel; sourceTree = "<group>"; };
 		86E724EA25D26AE000A85F5C /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		86E724F225D26F7800A85F5C /* UIViewController+extension+showErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension+showErrorAlert.swift"; sourceTree = "<group>"; };
-		86F4280125DA23F000AC17F8 /* TimerChainsCollectionViewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerChainsCollectionViewListCell.swift; sourceTree = "<group>"; };
+		86F4280125DA23F000AC17F8 /* TimerCollectionViewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,14 @@
 		8674C18225DBE1BE0049AD6A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		86BD671E25DFD8F200F04BAB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				86E724F225D26F7800A85F5C /* UIViewController+extension+showErrorAlert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -159,8 +171,10 @@
 		86E724E225D2694B00A85F5C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				86E724F225D26F7800A85F5C /* UIViewController+extension+showErrorAlert.swift */,
+				86BD671E25DFD8F200F04BAB /* Extensions */,
 				86E724B225D2606900A85F5C /* TimerChainsViewController.swift */,
+				86BD671F25DFD96300F04BAB /* EditTimerChainViewController.swift */,
+				86BD672425DFE74900F04BAB /* EditTimerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -178,7 +192,7 @@
 		86EEC08A25DE86FA00FEE3FD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				86F4280125DA23F000AC17F8 /* TimerChainsCollectionViewListCell.swift */,
+				86F4280125DA23F000AC17F8 /* TimerCollectionViewListCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -316,11 +330,13 @@
 				86E724EB25D26AE000A85F5C /* DataController.swift in Sources */,
 				86E724F325D26F7800A85F5C /* UIViewController+extension+showErrorAlert.swift in Sources */,
 				86E724B325D2606900A85F5C /* TimerChainsViewController.swift in Sources */,
+				86BD672025DFD96300F04BAB /* EditTimerChainViewController.swift in Sources */,
 				86E724AF25D2606900A85F5C /* AppDelegate.swift in Sources */,
 				86E724B125D2606900A85F5C /* SceneDelegate.swift in Sources */,
 				8669F8E925DB74EC00FCD39B /* ColumnFlowLayout.swift in Sources */,
 				86E724E625D26A3500A85F5C /* TimerChain.xcdatamodeld in Sources */,
-				86F4280225DA23F000AC17F8 /* TimerChainsCollectionViewListCell.swift in Sources */,
+				86BD672525DFE74900F04BAB /* EditTimerViewController.swift in Sources */,
+				86F4280225DA23F000AC17F8 /* TimerCollectionViewListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

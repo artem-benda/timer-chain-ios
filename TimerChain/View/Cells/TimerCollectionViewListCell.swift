@@ -7,6 +7,6 @@
 
 import UIKit
 
-class TimerChainsCollectionViewListCell: UICollectionViewListCell {
+class TimerCollectionViewListCell: UICollectionViewListCell {
     
 }

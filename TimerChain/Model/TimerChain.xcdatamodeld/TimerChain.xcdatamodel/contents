@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D64" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AudioActionDescription" representedClassName="AudioActionDescription" syncable="YES" codeGenerationType="class">
         <attribute name="audioData" attributeType="Binary" storedInTruthFile="YES"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
@@ -21,7 +21,7 @@
     <entity name="Timer" representedClassName="Timer" syncable="YES" codeGenerationType="class">
         <attribute name="actionDescription" optional="YES" attributeType="String"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="durationSeconds" attributeType="Integer 64" minValueString="3" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="durationSeconds" attributeType="Integer 64" minValueString="3" defaultValueString="3" usesScalarValueType="YES"/>
         <attribute name="isAction" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="orderIndex" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -29,9 +29,9 @@
         <relationship name="chain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chain" inverseName="timers" inverseEntity="Chain"/>
     </entity>
     <elements>
-        <element name="Chain" positionX="-291.4349365234375" positionY="-13.79421997070312" width="128" height="103"/>
-        <element name="Timer" positionX="-70.25445556640625" positionY="-9.323822021484375" width="128" height="163"/>
         <element name="AudioActionDescription" positionX="151.4868774414062" positionY="-8.2830810546875" width="128" height="88"/>
         <element name="AudioRecordingTemplate" positionX="-73.91192626953125" positionY="207.1017150878906" width="128" height="118"/>
+        <element name="Chain" positionX="-291.4349365234375" positionY="-13.79421997070312" width="128" height="103"/>
+        <element name="Timer" positionX="-70.25445556640625" positionY="-9.323822021484375" width="128" height="149"/>
     </elements>
 </model>
