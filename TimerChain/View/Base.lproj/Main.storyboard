@@ -67,6 +67,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Timer Chains" id="C0q-oh-KUE">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="oOf-I5-pET"/>
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="VNQ-29-1c3">
                             <connections>
                                 <action selector="presentNewChainAlert" destination="BYZ-38-t0r" id="IhM-xS-KHb"/>
@@ -77,7 +78,7 @@
                         <outlet property="collectionView" destination="1Z2-DE-XNZ" id="w7H-HO-BKi"/>
                         <outlet property="searchBar" destination="I74-3S-2FB" id="SkX-Ky-Mo3"/>
                         <segue destination="bBp-Pw-vS7" kind="show" identifier="editTimerChainSegue" id="f0x-WW-r6W"/>
-                        <segue destination="34y-mt-h9I" kind="show" id="LDc-Wj-wlA"/>
+                        <segue destination="34y-mt-h9I" kind="presentation" identifier="showPlaySegue" modalPresentationStyle="fullScreen" id="LDc-Wj-wlA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -103,19 +104,20 @@
                                         <rect key="frame" x="0.0" y="83" width="414" height="725"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KS6-xK-wQc">
-                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="itemSize" width="357" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="timerCell" id="RLV-eO-HvY" customClass="UICollectionViewListCell">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                <rect key="frame" x="28.5" y="0.0" width="357" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d1s-cw-wPs">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="357" height="128"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </collectionViewCellContentView>
+                                                <size key="customSize" width="357" height="128"/>
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
@@ -142,17 +144,17 @@
                     <connections>
                         <outlet property="collectionView" destination="9I5-DT-MQ2" id="WrH-Tc-WzW"/>
                         <outlet property="searchBar" destination="AMN-Ta-Car" id="ERJ-WU-8TV"/>
-                        <segue destination="vgd-TA-Bcb" kind="show" id="yTK-Gh-ECM"/>
+                        <segue destination="vgd-TA-Bcb" kind="show" identifier="editTimerSegue" id="yTK-Gh-ECM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0l-cl-K8W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2522" y="-189"/>
+            <point key="canvasLocation" x="2521.739130434783" y="-189.50892857142856"/>
         </scene>
         <!--Edit Timer View Controller-->
         <scene sceneID="xIE-80-8qY">
             <objects>
-                <viewController id="vgd-TA-Bcb" userLabel="Edit Timer View Controller" sceneMemberID="viewController">
+                <viewController id="vgd-TA-Bcb" userLabel="Edit Timer View Controller" customClass="EditTimerViewController" customModule="TimerChain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kMU-IB-BFw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -173,7 +175,7 @@
         <!--Audio Templates-->
         <scene sceneID="BJZ-0l-buk">
             <objects>
-                <viewController id="GIb-fm-zpv" sceneMemberID="viewController">
+                <viewController id="GIb-fm-zpv" customClass="AudioTemplatesViewController" customModule="TimerChain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iFv-CY-xCL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -217,7 +219,12 @@
                             <constraint firstItem="DZr-iA-tk9" firstAttribute="leading" secondItem="nOd-SX-DcS" secondAttribute="leading" id="etI-rF-B6g"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Audio Templates" id="vD8-O0-TCb"/>
+                    <navigationItem key="navigationItem" title="Audio Templates" id="vD8-O0-TCb">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="dVk-I8-1OC"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="fYf-wO-3yE" kind="show" identifier="recordAudioSegue" id="D0h-We-F1a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t4F-gS-bIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -226,22 +233,23 @@
         <!--Record Audio View Controller-->
         <scene sceneID="5pD-JT-5xY">
             <objects>
-                <viewController title="Record Audio Instruction" id="fYf-wO-3yE" userLabel="Record Audio View Controller" sceneMemberID="viewController">
+                <viewController title="Record Audio Instruction" id="fYf-wO-3yE" userLabel="Record Audio View Controller" customClass="RecordAudioViewController" customModule="TimerChain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Iq-c4-kcF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="pSh-l5-FOd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="omj-AQ-ZRc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jYp-90-ua1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3426" y="1098"/>
+            <point key="canvasLocation" x="2522" y="1156"/>
         </scene>
         <!--Play Timer Chain View Controller-->
         <scene sceneID="LOi-DN-Epo">
             <objects>
-                <viewController id="34y-mt-h9I" userLabel="Play Timer Chain View Controller" sceneMemberID="viewController">
+                <viewController id="34y-mt-h9I" userLabel="Play Timer Chain View Controller" customClass="PlayTimerChainViewController" customModule="TimerChain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kVU-DW-z0s">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
