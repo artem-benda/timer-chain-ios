@@ -79,7 +79,7 @@ class EditTimerChainViewController: UIViewController {
     
     /// Display an alert prompting the user to name a new timer chain. Calls
     /// `addChain(name:)`.
-    @IBAction func presentNewChainAlert() {
+    @IBAction func presentNewTimerAlert() {
         let alert = UIAlertController(title: "New Timer", message: "Enter a name for this Timer", preferredStyle: .alert)
 
         // Create actions
@@ -111,22 +111,13 @@ class EditTimerChainViewController: UIViewController {
     /// Adds a new timer to the database
     func addTimer(name: String) {
         print("addTimer(start) name = \(name)")
-        // Returning if the request is not performed
-        guard let fetchedObjects = fetchedResultController.fetchedObjects else { return }
-        
-        print("Adding new Timer")
-        let timer = Timer(context: dataController.viewContext)
-        timer.name = name
-        timer.createdAt = Date()
-        // Set orderIndex, so it would be last element
-        timer.orderIndex = Int64(fetchedObjects.count)
-        try? dataController.viewContext.save()
+        performSegue(withIdentifier: "editTimerSegue", sender: EditTimerViewController.Mode.new(withName: name))
     }
     
     @IBAction func showActionMenu() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Add Timer", style: .default) { _ in
-           return
+            self.presentNewTimerAlert()
         })
         alert.addAction(UIAlertAction(title: "Rename Chain", style: .default) { _ in
             return
@@ -151,10 +142,31 @@ class EditTimerChainViewController: UIViewController {
         for o in collectionViewOperations { o.cancel() }
         collectionViewOperations.removeAll()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "editTimerSegue":
+            let mode = sender as! EditTimerViewController.Mode
+            let viewController = segue.destination as! EditTimerViewController
+            viewController.chain = chain
+            viewController.mode = mode
+            viewController.dataController = dataController
+        default:
+            break
+        }
+    }
 
 }
 
 extension EditTimerChainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let fetchedObjects = fetchedResultController.fetchedObjects
+        guard fetchedObjects != nil, indexPath.row < fetchedObjects!.count else { return }
+        if let timer = fetchedResultController.fetchedObjects?[indexPath.row] {
+            let mode = EditTimerViewController.Mode.edit(timer)
+            performSegue(withIdentifier: "editTimerSegue", sender: mode)
+        }
+    }
 }
 
 extension EditTimerChainViewController: UICollectionViewDataSource {

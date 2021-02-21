@@ -158,8 +158,71 @@
                     <view key="view" contentMode="scaleToFill" id="kMU-IB-BFw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GPu-w5-UiC">
+                                <rect key="frame" x="20" y="108" width="374" height="685"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Timer Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-vk-snY" userLabel="Timer Name Text Field">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Action Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BnE-70-GVE">
+                                        <rect key="frame" x="0.0" y="56" width="374" height="120"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <accessibility key="accessibilityConfiguration" label="Action Description"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="SLL-eo-RzZ"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Xnv-XZ-AHk">
+                                        <rect key="frame" x="0.0" y="196" width="374" height="32"/>
+                                        <segments>
+                                            <segment title="Action"/>
+                                            <segment title="Break"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Gf8-7B-k6S">
+                                        <rect key="frame" x="0.0" y="247" width="374" height="36"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Duration, minutes" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ozJ-DL-5sU" userLabel="Duration Minutes Text Field">
+                                                <rect key="frame" x="0.0" y="0.0" width="182" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Duration, seconds" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ceq-52-nXb" userLabel="Duration Seconds Text Field">
+                                                <rect key="frame" x="192" y="0.0" width="182" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="fPD-xG-vPt">
+                                        <rect key="frame" x="0.0" y="303" width="374" height="382"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="7QH-SF-nkN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7QH-SF-nkN" firstAttribute="trailing" secondItem="GPu-w5-UiC" secondAttribute="trailing" constant="20" id="HXB-zU-2uH"/>
+                            <constraint firstItem="7QH-SF-nkN" firstAttribute="bottom" secondItem="GPu-w5-UiC" secondAttribute="bottom" constant="20" id="TEc-ml-pGt"/>
+                            <constraint firstItem="GPu-w5-UiC" firstAttribute="leading" secondItem="7QH-SF-nkN" secondAttribute="leading" constant="20" id="WAx-eu-B84"/>
+                            <constraint firstItem="GPu-w5-UiC" firstAttribute="top" secondItem="7QH-SF-nkN" secondAttribute="top" constant="20" id="cUx-Pn-4fL"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="b5B-AU-cBC">
                         <rightBarButtonItems>
@@ -220,6 +283,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Audio Templates" id="vD8-O0-TCb">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="4JS-CK-5o6"/>
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="dVk-I8-1OC"/>
                     </navigationItem>
                     <connections>
@@ -326,6 +390,9 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <image name="volume.3" catalog="system" width="128" height="86"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
