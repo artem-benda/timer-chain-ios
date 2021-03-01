@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class TimerChainsViewController: UIViewController {
+class TimerChainsViewController: UIViewController, DataViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     

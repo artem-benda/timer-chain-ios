@@ -8,16 +8,23 @@
 import UIKit
 import AVFoundation
 
-class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
+class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, DataViewController {
     
     var mode: RecordAudioMode!
+    var dataController: DataController!
 
     var audioRecorder: AVAudioRecorder!
 
-    @IBOutlet weak var recordingLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
-    @IBOutlet weak var stopRecordingButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var clearButton: UIButton!
     
+    @IBOutlet weak var saveButton: UIButton!
+    
+    @IBOutlet weak var templateNameTextField: UITextField!
+    @IBOutlet weak var saveAsTempateStackView: UIStackView!
+    @IBOutlet weak var saveAsTemplateSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,12 +61,12 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     func configureUI(isRecording: Bool) {
         if isRecording {
             recordButton.isEnabled = false
-            stopRecordingButton.isEnabled = true
-            recordingLabel.text = "Recording in Progress"
+            //stopRecordingButton.isEnabled = true
+            //recordingLabel.text = "Recording in Progress"
         } else {
             recordButton.isEnabled = true
-            stopRecordingButton.isEnabled = false
-            recordingLabel.text = "Tap to Record"
+            //stopRecordingButton.isEnabled = false
+            //recordingLabel.text = "Tap to Record"
         }
     }
     

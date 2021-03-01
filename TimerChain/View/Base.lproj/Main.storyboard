@@ -284,10 +284,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Audio Templates" id="vD8-O0-TCb">
                         <barButtonItem key="backBarButtonItem" title="Back" id="4JS-CK-5o6"/>
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="dVk-I8-1OC"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="dVk-I8-1OC">
+                            <connections>
+                                <action selector="handleAddAudioTemplate:" destination="GIb-fm-zpv" id="2IT-rG-VAu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="fYf-wO-3yE" kind="show" identifier="recordAudioSegue" id="D0h-We-F1a"/>
+                        <segue destination="fYf-wO-3yE" kind="show" identifier="audioTemplateSegue" id="D0h-We-F1a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t4F-gS-bIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -302,28 +306,64 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="odL-RE-u1g">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="odL-RE-u1g">
                                 <rect key="frame" x="20" y="108" width="374" height="685"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUX-1F-hok" userLabel="Template Name Text Field">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Template Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUX-1F-hok" userLabel="Template Name Text Field">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uld-92-Yez">
-                                        <rect key="frame" x="0.0" y="34" width="374" height="90"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uld-92-Yez">
+                                        <rect key="frame" x="0.0" y="54" width="374" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkY-EY-4eJ" userLabel="Record Button">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkY-EY-4eJ" userLabel="Record Button">
+                                                <rect key="frame" x="0.0" y="0.0" width="78.5" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="AF5-Q4-Cn7"/>
+                                                </constraints>
+                                                <state key="normal" image="record-button"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="imageView.contentMode">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVc-RK-USD" userLabel="Play Button">
-                                                <rect key="frame" x="0.0" y="30" width="374" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVc-RK-USD" userLabel="Play Button">
+                                                <rect key="frame" x="98.5" y="0.0" width="78.5" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="kiq-cm-APf"/>
+                                                </constraints>
+                                                <state key="normal" image="play-button"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="imageView.contentMode">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnO-eU-LZW" userLabel="Stop Button">
-                                                <rect key="frame" x="0.0" y="60" width="374" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnO-eU-LZW" userLabel="Stop Button">
+                                                <rect key="frame" x="197" y="0.0" width="78.5" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="clz-z9-6nn"/>
+                                                </constraints>
+                                                <state key="normal" image="stop-button"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="imageView.contentMode">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jky-hJ-XUA" userLabel="Clear Button">
+                                                <rect key="frame" x="295.5" y="0.0" width="78.5" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="irK-r0-6GI"/>
+                                                </constraints>
+                                                <state key="normal" image="reset-button"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="imageView.contentMode">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -342,7 +382,7 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="CiO-8y-g3M">
-                                        <rect key="frame" x="0.0" y="155" width="374" height="500"/>
+                                        <rect key="frame" x="0.0" y="175" width="374" height="460"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qae-fR-Q5z" userLabel="Save Changes Button">
@@ -362,6 +402,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="omj-AQ-ZRc"/>
+                    <connections>
+                        <outlet property="clearButton" destination="Jky-hJ-XUA" id="VxH-u3-sJX"/>
+                        <outlet property="playButton" destination="tVc-RK-USD" id="QFB-ib-02T"/>
+                        <outlet property="recordButton" destination="hkY-EY-4eJ" id="NT9-jM-nfz"/>
+                        <outlet property="saveAsTempateStackView" destination="KrW-mq-GPq" id="emW-sU-wka"/>
+                        <outlet property="saveAsTemplateSwitch" destination="AEh-85-G8r" id="HdT-vW-6QS"/>
+                        <outlet property="saveButton" destination="qae-fR-Q5z" id="uZ8-bK-uOo"/>
+                        <outlet property="stopButton" destination="KnO-eU-LZW" id="b1C-Zb-OnK"/>
+                        <outlet property="templateNameTextField" destination="UUX-1F-hok" id="G0X-3P-mhb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jYp-90-ua1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -444,7 +494,11 @@
     <resources>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="personalhotspot" catalog="system" width="128" height="75"/>
+        <image name="play-button" width="155" height="155"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="record-button" width="154.5" height="155"/>
+        <image name="reset-button" width="154.5" height="155"/>
+        <image name="stop-button" width="155" height="155"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <image name="volume.3" catalog="system" width="128" height="86"/>
         <systemColor name="labelColor">

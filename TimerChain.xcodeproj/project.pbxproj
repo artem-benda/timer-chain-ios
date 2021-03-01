@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8669F8E925DB74EC00FCD39B /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8669F8E825DB74EC00FCD39B /* ColumnFlowLayout.swift */; };
+		8684D27725ED118400224BDA /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8684D27625ED118400224BDA /* DataViewController.swift */; };
 		86BD672025DFD96300F04BAB /* EditTimerChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BD671F25DFD96300F04BAB /* EditTimerChainViewController.swift */; };
 		86BD672525DFE74900F04BAB /* EditTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BD672425DFE74900F04BAB /* EditTimerViewController.swift */; };
 		86BE093A25E0076000F7B4DB /* PlayTimerChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BE093925E0076000F7B4DB /* PlayTimerChainViewController.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		8669F8E825DB74EC00FCD39B /* ColumnFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnFlowLayout.swift; sourceTree = "<group>"; };
+		8684D27625ED118400224BDA /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		86BD671F25DFD96300F04BAB /* EditTimerChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerChainViewController.swift; sourceTree = "<group>"; };
 		86BD672425DFE74900F04BAB /* EditTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerViewController.swift; sourceTree = "<group>"; };
 		86BE093925E0076000F7B4DB /* PlayTimerChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayTimerChainViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				86BE093925E0076000F7B4DB /* PlayTimerChainViewController.swift */,
 				86BE093E25E0079500F7B4DB /* AudioTemplatesViewController.swift */,
 				86BE094325E007B900F7B4DB /* RecordAudioViewController.swift */,
+				8684D27625ED118400224BDA /* DataViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				86BE093A25E0076000F7B4DB /* PlayTimerChainViewController.swift in Sources */,
 				86E724AF25D2606900A85F5C /* AppDelegate.swift in Sources */,
 				86E724B125D2606900A85F5C /* SceneDelegate.swift in Sources */,
+				8684D27725ED118400224BDA /* DataViewController.swift in Sources */,
 				8669F8E925DB74EC00FCD39B /* ColumnFlowLayout.swift in Sources */,
 				86E724E625D26A3500A85F5C /* TimerChain.xcdatamodeld in Sources */,
 				86BE093F25E0079500F7B4DB /* AudioTemplatesViewController.swift in Sources */,

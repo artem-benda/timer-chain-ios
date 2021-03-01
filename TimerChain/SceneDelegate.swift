@@ -22,10 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         dataController.load()
                         
         let tabViewController = window?.rootViewController as! UITabBarController
-        let navigationController = tabViewController.children[0] as! UINavigationController
-        let mainViewController = navigationController.topViewController as! TimerChainsViewController
         
-        mainViewController.dataController = dataController
+        for controller in tabViewController.children {
+            let navigationController = controller as! UINavigationController
+            if var dataViewController = navigationController.topViewController as? DataViewController {
+                dataViewController.dataController = dataController
+            }
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

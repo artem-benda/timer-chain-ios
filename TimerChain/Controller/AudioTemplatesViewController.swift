@@ -7,7 +7,9 @@
 
 import UIKit
 
-class AudioTemplatesViewController: UIViewController {
+class AudioTemplatesViewController: UIViewController, DataViewController {
+    
+    var dataController: DataController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,15 +17,19 @@ class AudioTemplatesViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func handleAddAudioTemplate(_ sender: Any) {
+        let mode = RecordAudioViewController.RecordAudioMode.newTemplate
+        performSegue(withIdentifier: "audioTemplateSegue", sender: mode)
     }
-    */
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "audioTemplateSegue":
+            let viewController = segue.destination as! RecordAudioViewController
+            viewController.mode = sender as? RecordAudioViewController.RecordAudioMode
+            viewController.dataController = dataController
+        default:
+            break
+        }
+    }
 }

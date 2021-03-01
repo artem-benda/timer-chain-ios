@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditTimerViewController: UIViewController {
+class EditTimerViewController: UIViewController, DataViewController {
     
     var chain: Chain!
     var mode: Mode!
