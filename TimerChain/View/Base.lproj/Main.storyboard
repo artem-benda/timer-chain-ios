@@ -314,8 +314,14 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCW-XD-KQh" userLabel="No Recording">
+                                        <rect key="frame" x="0.0" y="54" width="374" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uld-92-Yez">
-                                        <rect key="frame" x="0.0" y="54" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="95.5" width="374" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkY-EY-4eJ" userLabel="Record Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="78.5" height="50"/>
@@ -328,6 +334,9 @@
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="recordAudio:" destination="fYf-wO-3yE" eventType="touchUpInside" id="HSs-KN-ChJ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVc-RK-USD" userLabel="Play Button">
                                                 <rect key="frame" x="98.5" y="0.0" width="78.5" height="50"/>
@@ -340,6 +349,9 @@
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="playRecording:" destination="fYf-wO-3yE" eventType="touchUpInside" id="pqJ-OW-6b5"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnO-eU-LZW" userLabel="Stop Button">
                                                 <rect key="frame" x="197" y="0.0" width="78.5" height="50"/>
@@ -352,6 +364,9 @@
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="stopRecording:" destination="fYf-wO-3yE" eventType="touchUpInside" id="ewW-Zi-zVl"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jky-hJ-XUA" userLabel="Clear Button">
                                                 <rect key="frame" x="295.5" y="0.0" width="78.5" height="50"/>
@@ -364,15 +379,18 @@
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="clearRecording:" destination="fYf-wO-3yE" eventType="touchUpInside" id="6MI-2N-r61"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KrW-mq-GPq">
-                                        <rect key="frame" x="0.0" y="124" width="374" height="31"/>
+                                        <rect key="frame" x="0.0" y="165.5" width="374" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save as Template" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8z-gs-npG">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="31"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -382,12 +400,15 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="CiO-8y-g3M">
-                                        <rect key="frame" x="0.0" y="175" width="374" height="460"/>
+                                        <rect key="frame" x="0.0" y="216.5" width="374" height="418.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qae-fR-Q5z" userLabel="Save Changes Button">
                                         <rect key="frame" x="0.0" y="655" width="374" height="30"/>
                                         <state key="normal" title="Save Changes"/>
+                                        <connections>
+                                            <action selector="saveChanges:" destination="fYf-wO-3yE" eventType="touchUpInside" id="TNC-Oa-48a"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -406,6 +427,7 @@
                         <outlet property="clearButton" destination="Jky-hJ-XUA" id="VxH-u3-sJX"/>
                         <outlet property="playButton" destination="tVc-RK-USD" id="QFB-ib-02T"/>
                         <outlet property="recordButton" destination="hkY-EY-4eJ" id="NT9-jM-nfz"/>
+                        <outlet property="recordingLabel" destination="iCW-XD-KQh" id="zpO-7f-Ifr"/>
                         <outlet property="saveAsTempateStackView" destination="KrW-mq-GPq" id="emW-sU-wka"/>
                         <outlet property="saveAsTemplateSwitch" destination="AEh-85-G8r" id="HdT-vW-6QS"/>
                         <outlet property="saveButton" destination="qae-fR-Q5z" id="uZ8-bK-uOo"/>

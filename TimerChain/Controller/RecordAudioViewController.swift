@@ -14,6 +14,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
     var dataController: DataController!
 
     var audioRecorder: AVAudioRecorder!
+    var audioState: AudioState!
 
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
@@ -22,19 +23,22 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
     
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet weak var recordingLabel: UILabel!
     @IBOutlet weak var templateNameTextField: UITextField!
     @IBOutlet weak var saveAsTempateStackView: UIStackView!
     @IBOutlet weak var saveAsTemplateSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI(isRecording: false)
+        configureUIInitial()
+        configureUI()
     }
 
     @IBAction func recordAudio(_ sender: Any) {
-        configureUI(isRecording: true)
+        audioState = .recording
+        configureUI()
         
-        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
+        let dirPath = NSTemporaryDirectory() //NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
         let recordingName = "audioInstruction.wav"
         let pathArray = [dirPath, recordingName]
         let filePath = URL(string: pathArray.joined(separator: "/"))
@@ -50,33 +54,55 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
     }
     
     @IBAction func stopRecording(_ sender: Any) {
-        configureUI(isRecording: false)
-        
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
     }
     
+    @IBAction func playRecording(_ sender: Any) {
+        
+    }
+    
+    @IBAction func clearRecording(_ sender: Any) {
+        
+    }
+    
+    @IBAction func saveChanges(_ sender: Any) {
+        
+    }
+    
     // Disable or enable buttons depending on recording state
-    func configureUI(isRecording: Bool) {
-        if isRecording {
-            recordButton.isEnabled = false
-            //stopRecordingButton.isEnabled = true
-            //recordingLabel.text = "Recording in Progress"
-        } else {
-            recordButton.isEnabled = true
-            //stopRecordingButton.isEnabled = false
-            //recordingLabel.text = "Tap to Record"
-        }
+    func configureUI() {
+        
     }
     
     // MARK: AV Audio Recording Delegate
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
-            performSegue(withIdentifier: "stopRecording", sender: recorder.url)
+            let data = FileManager.default.contents(atPath: recorder.url.absoluteString)!
+            audioState = .recorded(data: data)
         } else {
             print("Recording was not successfull")
+            audioState = .notRecorded
+        }
+        configureUI()
+    }
+    
+    private func configureUIInitial() {
+        switch mode {
+        case .newTemplate:
+            templateNameTextField.isHidden = false
+            saveAsTempateStackView.isHidden = true
+        case .editTemplate:
+            templateNameTextField.isHidden = false
+            saveAsTempateStackView.isHidden = true
+        case .editTimer:
+            templateNameTextField.isHidden = true
+            saveAsTempateStackView.isHidden = false
+        default:
+            print("No mode selected")
+            break
         }
     }
     
@@ -85,4 +111,13 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
         case editTemplate(_ template: AudioRecordingTemplate)
         case editTimer(_ timer: Timer)
     }
+    
+    enum AudioState {
+        case notRecorded
+        case recording
+        case playing(data: Data)
+        case recorded(data: Data)
+    }
 }
+
+
