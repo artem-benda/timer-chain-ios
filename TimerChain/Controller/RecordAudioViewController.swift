@@ -14,6 +14,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
     var dataController: DataController!
 
     var audioRecorder: AVAudioRecorder!
+    var audioPlayer: AVAudioPlayer!
     var audioState: AudioState!
 
     @IBOutlet weak var recordButton: UIButton!
@@ -32,6 +33,17 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
         super.viewDidLoad()
         configureUIInitial()
         configureUI()
+    }
+    
+    private func setupPlayer(data: Data) -> Bool {
+        do {
+            try audioPlayer = AVAudioPlayer(data: data)
+            audioPlayer.delegate = self
+            return true
+        } catch {
+            print("Could not initialize player with provided binary data")
+            return false
+        }
     }
 
     @IBAction func recordAudio(_ sender: Any) {
@@ -54,17 +66,29 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
     }
     
     @IBAction func stopRecording(_ sender: Any) {
-        audioRecorder.stop()
-        let audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setActive(false)
+        switch audioState {
+        case .recording:
+            audioState = .stoppedRecording
+            configureUI()
+            audioRecorder.stop()
+            let audioSession = AVAudioSession.sharedInstance()
+            try! audioSession.setActive(false)
+        case .playing(let data):
+            audioState = .ready(data: data)
+            stopAudio()
+            configureUI()
+        default:
+            break
+        }
     }
     
     @IBAction func playRecording(_ sender: Any) {
-        
+        playSound()
     }
     
     @IBAction func clearRecording(_ sender: Any) {
-        
+        audioState = .notRecorded
+        configureUI()
     }
     
     @IBAction func saveChanges(_ sender: Any) {
@@ -73,7 +97,41 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
     
     // Disable or enable buttons depending on recording state
     func configureUI() {
-        
+        switch audioState {
+        case .notRecorded:
+            recordingLabel.text = "No Recording"
+            recordButton.isEnabled = true
+            playButton.isEnabled = false
+            stopButton.isEnabled = false
+            clearButton.isEnabled = false
+        case .playing:
+            recordingLabel.text = "Playing audio..."
+            recordButton.isEnabled = false
+            playButton.isEnabled = false
+            stopButton.isEnabled = true
+            clearButton.isEnabled = false
+        case .ready:
+            let duration = audioPlayer.duration.rounded().description
+            recordingLabel.text = "Recording duration: \(duration)"
+            recordButton.isEnabled = false
+            playButton.isEnabled = true
+            stopButton.isEnabled = false
+            clearButton.isEnabled = true
+        case .stoppedRecording:
+            recordingLabel.text = "Processing Recording..."
+            recordButton.isEnabled = false
+            playButton.isEnabled = false
+            stopButton.isEnabled = false
+            clearButton.isEnabled = false
+        case .recording:
+            recordingLabel.text = "Recording..."
+            recordButton.isEnabled = false
+            playButton.isEnabled = false
+            stopButton.isEnabled = true
+            clearButton.isEnabled = false
+        default:
+            break
+        }
     }
     
     // MARK: AV Audio Recording Delegate
@@ -81,7 +139,11 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
             let data = FileManager.default.contents(atPath: recorder.url.absoluteString)!
-            audioState = .recorded(data: data)
+            if setupPlayer(data: data) {
+                audioState = .ready(data: data)
+            } else {
+                audioState = .notRecorded
+            }
         } else {
             print("Recording was not successfull")
             audioState = .notRecorded
@@ -94,12 +156,23 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
         case .newTemplate:
             templateNameTextField.isHidden = false
             saveAsTempateStackView.isHidden = true
-        case .editTemplate:
+            audioState = .notRecorded
+        case .editTemplate(let template):
             templateNameTextField.isHidden = false
             saveAsTempateStackView.isHidden = true
-        case .editTimer:
+            if let data = template.audioData {
+                audioState = .ready(data: data)
+            } else {
+                audioState = .notRecorded
+            }
+        case .editTimer(let timer):
             templateNameTextField.isHidden = true
             saveAsTempateStackView.isHidden = false
+            if let data = timer.audioActionDescription?.audioData {
+                audioState = .ready(data: data)
+            } else {
+                audioState = .notRecorded
+            }
         default:
             print("No mode selected")
             break
@@ -115,9 +188,47 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate, Data
     enum AudioState {
         case notRecorded
         case recording
+        case stoppedRecording
         case playing(data: Data)
-        case recorded(data: Data)
+        case ready(data: Data)
     }
 }
 
-
+extension RecordAudioViewController: AVAudioPlayerDelegate {
+    
+    // MARK: Audio Functions
+    
+    func playSound() {
+        switch audioState {
+        case .ready(let data):
+            do {
+                if audioPlayer == nil, data != audioPlayer.data {
+                    let isSuccess = setupPlayer(data: data)
+                    guard isSuccess == true else { return }
+                }
+                audioState = .playing(data: data)
+                configureUI()
+                audioPlayer.play()
+            }
+        default:
+            break
+        }
+    }
+    
+    func stopAudio() {
+        switch audioState {
+        case .playing(let data):
+            audioPlayer?.stop()
+            audioState = .ready(data: data)
+            configureUI()
+        default:
+            break
+        }
+    }
+    
+    // MARK AVAudioPlayerDelegate
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        print("Playback finished")
+        stopAudio()
+    }
+}
